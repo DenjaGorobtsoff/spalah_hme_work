@@ -1,0 +1,38 @@
+<?php
+SELECT * FROM player WHERE firstname LIKE 'а%' //1
+
+SELECT * FROM player WHERE firstname LIKE '%ни%' //2
+
+SELECT * FROM player WHERE firstname OR lastname LIKE '%с' //3
+
+SELECT * FROM player WHERE is_captain = 1 //4
+
+SELECT COUNT(player_id) FROM player WHERE position_id = 2 //5
+
+SELECT COUNT(player_id) FROM player WHERE team_id = 1 AND position_id = 4 //6
+
+SELECT * FROM player WHERE team_id = 6 AND position_id = 3 //7
+
+SELECT * FROM stadium WHERE opacity >= 20000 //8
+
+SELECT SUM(opacity) FROM stadium //9
+
+SELECT COUNT(stadium_id) AS stadium_count,city_id
+FROM stadium
+GROUP BY city_id //10
+
+SELECT AVG(opacity) FROM stadium  //11
+
+SELECT name,opacity FROM `stadium`
+WHERE city_id = (SELECT city_id FROM city WHERE name = 'Киев') AND city_id = (SELECT city_id FROM city WHERE name = 'Харьков')
+OR opacity < 25000 //12
+
+SELECT lastname,firstname FROM `player`
+WHERE team_id = (SELECT team_id FROM team WHERE name = 'Шахтер Донецк')
+ORDER BY lastname //13
+
+SELECT * FROM stadium
+ORDER BY opacity DESC //14
+
+SELECT COUNT(city_id) FROM stadium
+WHERE city_id > 1 //15
