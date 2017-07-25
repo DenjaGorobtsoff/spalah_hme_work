@@ -74,3 +74,21 @@ function upYear($bigYear){
 }
 
 echo upYear($z);
+//6)
+function timeZone($time)
+{
+    $timeZoneDiffNYyTokMy = array();
+    date_default_timezone_set('Europe/Kiev');
+    $d = date('d.m.Y');
+    $myTime = strtotime($time);
+    date_default_timezone_set('America/New_York');
+    $timeZoneDiffNYyTokMy['nyrk']=((strtotime($d.$time)-$myTime)/3600);
+    date_default_timezone_set('Asia/Tokyo');
+    $timeZoneDiffNYyTokMy['tok']=((strtotime($d.$time)-$myTime)/3600);
+
+   return $timeZoneDiffNYyTokMy;
+
+}
+$a = '13:00';
+$countTime = timeZone($a);
+echo '<p>New York '.$countTime['nyrk'].'<br> Tokyo '.$countTime['tok'].'<br></p>';
